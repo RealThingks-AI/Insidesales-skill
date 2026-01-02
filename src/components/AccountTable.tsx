@@ -423,8 +423,8 @@ const AccountTable = forwardRef<AccountTableRef, AccountTableProps>(({
     const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % colors.length;
     return colors[index];
   };
-  const formatCurrency = (value?: number) => {
-    if (!value) return '-';
+  const formatCurrency = (value?: number): React.ReactNode => {
+    if (!value) return <span className="block text-center w-full">-</span>;
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -534,9 +534,9 @@ const AccountTable = forwardRef<AccountTableRef, AccountTableProps>(({
                             </button>
                           </div> : column.field === 'account_owner' ? <span className="truncate block">
                             {account.account_owner ? displayNames[account.account_owner] || "Loading..." : <span className="block text-center w-full">-</span>}
-                          </span> : column.field === 'status' && account.status ? <Badge variant="outline" className={`whitespace-nowrap ${getStatusBadgeClasses(account.status)}`}>
+                          </span> : column.field === 'status' ? (account.status ? <Badge variant="outline" className={`whitespace-nowrap ${getStatusBadgeClasses(account.status)}`}>
                             {account.status}
-                          </Badge> : column.field === 'score' ? <span className={`font-medium ${(account.score || 0) >= 70 ? 'text-green-600 dark:text-green-400' : (account.score || 0) >= 40 ? 'text-amber-600 dark:text-amber-400' : 'text-muted-foreground'}`}>
+                          </Badge> : <span className="block text-center w-full">-</span>) : column.field === 'score' ? <span className={`font-medium ${(account.score || 0) >= 70 ? 'text-green-600 dark:text-green-400' : (account.score || 0) >= 40 ? 'text-amber-600 dark:text-amber-400' : 'text-muted-foreground'}`}>
                             {account.score ?? <span className="block text-center w-full">-</span>}
                           </span> : column.field === 'segment' ? account.segment ? <Badge variant="outline" className="text-xs">
                               {account.segment}
