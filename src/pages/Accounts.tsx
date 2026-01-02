@@ -1,6 +1,6 @@
 import AccountTable from "@/components/AccountTable";
 import { Button } from "@/components/ui/button";
-import { Settings, Trash2, Upload, Download } from "lucide-react";
+import { Settings, Trash2, Upload, Download, Plus } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -72,7 +72,7 @@ const Accounts = () => {
         <div className="px-6 h-16 flex items-center border-b w-full">
           <div className="flex items-center justify-between w-full">
             <div className="min-w-0 flex-1">
-              <h1 className="text-2xl text-foreground font-semibold">Accounts</h1>
+              <h1 className="text-xl text-foreground font-semibold">Accounts</h1>
             </div>
             <div className="flex items-center gap-3">
               {selectedAccounts.length > 0 && (
@@ -120,7 +120,8 @@ const Accounts = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <Button variant="outline" size="sm" onClick={() => setShowModal(true)}>
+              <Button size="sm" onClick={() => setShowModal(true)} className="gap-1.5">
+                <Plus className="w-4 h-4" />
                 Add Account
               </Button>
             </div>
@@ -129,7 +130,7 @@ const Accounts = () => {
       </div>
 
       {/* Hidden file input */}
-      <input ref={fileInputRef} type="file" accept=".csv" onChange={handleFileSelect} style={{ display: 'none' }} />
+      <input ref={fileInputRef} type="file" accept=".csv" onChange={handleFileSelect} className="hidden" />
 
       {/* Main Content Area */}
       <div className="flex-1 min-h-0 overflow-auto px-4 pt-2 pb-4">

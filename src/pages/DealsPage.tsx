@@ -348,7 +348,7 @@ const DealsPage = () => {
         <div className="px-6 h-16 flex items-center border-b w-full">
           <div className="flex items-center justify-between w-full">
             <div className="min-w-0 flex-1">
-              <h1 className="text-2xl text-foreground font-semibold">Deals</h1>
+              <h1 className="text-xl text-foreground font-semibold">Deals</h1>
             </div>
             <div className="flex items-center gap-3">
               <div className="bg-muted rounded-md p-0.5 flex gap-0.5">
@@ -367,7 +367,8 @@ const DealsPage = () => {
               window.dispatchEvent(new CustomEvent('open-deal-columns'));
             }} />
 
-              <Button variant="outline" size="sm" onClick={() => handleCreateDeal('Lead')}>
+              <Button size="sm" onClick={() => handleCreateDeal('Lead')} className="gap-1.5">
+                <Plus className="h-4 w-4" />
                 Add Deal
               </Button>
             </div>

@@ -214,7 +214,7 @@ All colors MUST be HSL.
     hsl(var(--muted)) 75%
   );
   background-size: 200% 100%;
-  animation: shimmer 1.5s ease-in-out infinite;
+  animation: shimmer 1s ease-in-out infinite;
 }
 
 /* Improved placeholder visibility (#24) */
@@ -242,7 +242,7 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
   }
 
@@ -367,7 +367,7 @@ All colors MUST be HSL.
       hsl(var(--muted) / 0.4),
       transparent
     );
-    animation: shimmer 1.5s infinite;
+    animation: shimmer 1s infinite;
   }
   
   @keyframes shimmer {
