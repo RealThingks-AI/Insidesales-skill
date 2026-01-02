@@ -233,22 +233,40 @@ const AccountTable = forwardRef<AccountTableRef, AccountTableProps>(({
     }
   };
   const getSortIcon = (field: string) => {
-    if (sortField !== field) {
-      return <ArrowUpDown className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />;
-    }
-    return sortDirection === 'asc' ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />;
+    return null; // Hide sort icons but keep sorting on click
   };
   const fetchAccounts = async () => {
     try {
       setLoading(true);
       const {
-        data,
+        data: accountsData,
         error
       } = await supabase.from('accounts').select('*').order('created_at', {
         ascending: false
       });
       if (error) throw error;
-      setAccounts(data || []);
+
+      // Fetch actual contact counts per account
+      const { data: contactCounts } = await supabase
+        .from('contacts')
+        .select('account_id')
+        .not('account_id', 'is', null);
+
+      // Calculate contact counts
+      const contactCountMap = (contactCounts || []).reduce((acc, c) => {
+        if (c.account_id) {
+          acc[c.account_id] = (acc[c.account_id] || 0) + 1;
+        }
+        return acc;
+      }, {} as Record<string, number>);
+
+      // Merge actual counts into accounts
+      const accountsWithCounts = (accountsData || []).map(account => ({
+        ...account,
+        contact_count: contactCountMap[account.id] || 0,
+      }));
+
+      setAccounts(accountsWithCounts);
     } catch (error) {
       toast({
         title: "Error",
@@ -536,11 +554,11 @@ const AccountTable = forwardRef<AccountTableRef, AccountTableProps>(({
                             {account.account_owner ? displayNames[account.account_owner] || "Loading..." : <span className="block text-center w-full">-</span>}
                           </span> : column.field === 'status' ? (account.status ? <Badge variant="outline" className={`whitespace-nowrap ${getStatusBadgeClasses(account.status)}`}>
                             {account.status}
-                          </Badge> : <span className="block text-center w-full">-</span>) : column.field === 'score' ? <span className={`font-medium ${(account.score || 0) >= 70 ? 'text-green-600 dark:text-green-400' : (account.score || 0) >= 40 ? 'text-amber-600 dark:text-amber-400' : 'text-muted-foreground'}`}>
-                            {account.score ?? <span className="block text-center w-full">-</span>}
+                          </Badge> : <span className="block text-center w-full">-</span>) : column.field === 'score' ? <span className={`font-medium text-center block w-full ${(account.score || 0) >= 70 ? 'text-green-600 dark:text-green-400' : (account.score || 0) >= 40 ? 'text-amber-600 dark:text-amber-400' : 'text-muted-foreground'}`}>
+                            {account.score ?? '-'}
                           </span> : column.field === 'segment' ? account.segment ? <Badge variant="outline" className="text-xs">
                               {account.segment}
-                            </Badge> : <span className="block text-center w-full">-</span> : column.field === 'total_revenue' ? <span className="font-medium">{formatCurrency(account.total_revenue)}</span> : column.field === 'deal_count' ? <span>{account.deal_count ?? 0}</span> : column.field === 'contact_count' ? <span>{account.contact_count ?? 0}</span> : column.field === 'tags' ? (account.tags && account.tags.length > 0 ? <TooltipProvider>
+                            </Badge> : <span className="block text-center w-full">-</span> : column.field === 'total_revenue' ? <span className="font-medium">{formatCurrency(account.total_revenue)}</span> : column.field === 'deal_count' ? <span className="block text-center w-full">{account.deal_count ?? 0}</span> : column.field === 'contact_count' ? <span className="block text-center w-full">{account.contact_count ?? 0}</span> : column.field === 'tags' ? (account.tags && account.tags.length > 0 ? <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <div className="flex items-center gap-1">
