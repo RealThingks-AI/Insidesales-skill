@@ -40,13 +40,12 @@ export const DealCard = ({
 
   return (
     <Card
-      className={`deal-card cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:-translate-y-1 hover:border-primary/50 group ${
-        isDragging ? 'opacity-50 shadow-2xl' : ''
-      } ${isSelected ? 'ring-2 ring-primary bg-primary/10 border-primary' : ''} ${
+      className={`deal-card cursor-pointer transition-all duration-200 hover:scale-[1.01] hover:shadow-md group ${
+        isDragging ? 'opacity-50 shadow-lg' : ''
+      } ${isSelected ? 'ring-2 ring-primary bg-primary/5 border-primary' : ''} ${
         selectionMode ? 'pl-8' : ''
-      } animate-fade-in border-border/50 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 button-scale min-h-[180px]`}
+      } animate-fade-in border-border/50 min-h-[180px]`}
       onClick={onClick}
-      style={{ boxShadow: isDragging ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)' : 'var(--shadow-sm)' }}
     >
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between mb-2">
