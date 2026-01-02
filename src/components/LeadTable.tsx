@@ -620,9 +620,9 @@ const LeadTable = forwardRef<LeadTableRef, LeadTableProps>(({
             <TableSkeleton columns={visibleColumns.length + 2} rows={10} />
           ) : (
             <Table>
-              <TableHeader className="bg-background">
-                <TableRow className="bg-muted/50 hover:bg-muted/60 border-b-2">
-                  <TableHead className="sticky top-0 z-20 w-12 text-center font-bold text-foreground bg-muted/50">
+              <TableHeader>
+                <TableRow className="sticky top-0 z-20 bg-muted border-b-2">
+                  <TableHead className="w-12 text-center font-bold text-foreground">
                     <div className="flex justify-center">
                       <Checkbox 
                         checked={selectedLeads.length > 0 && selectedLeads.length === Math.min(pageLeads.length, 50)} 
@@ -633,7 +633,7 @@ const LeadTable = forwardRef<LeadTableRef, LeadTableProps>(({
                   {visibleColumns.map(column => (
                     <TableHead 
                       key={column.field} 
-                      className="sticky top-0 z-20 text-left font-bold text-foreground bg-muted/50 px-4 py-3 whitespace-nowrap"
+                      className="text-left font-bold text-foreground px-4 py-3 whitespace-nowrap"
                     >
                       <div 
                         className="group flex items-center gap-2 cursor-pointer hover:text-primary" 
@@ -644,7 +644,7 @@ const LeadTable = forwardRef<LeadTableRef, LeadTableProps>(({
                       </div>
                     </TableHead>
                   ))}
-                  <TableHead className="sticky top-0 z-20 text-center font-bold text-foreground bg-muted/50 w-48 px-4 py-3">
+                  <TableHead className="text-center font-bold text-foreground w-48 px-4 py-3">
                     Actions
                   </TableHead>
                 </TableRow>
