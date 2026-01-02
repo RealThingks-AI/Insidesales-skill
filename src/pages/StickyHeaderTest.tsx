@@ -47,13 +47,13 @@ const StickyHeaderTest = () => {
           className="relative overflow-auto h-full"
         >
           <Table>
-            <TableHeader className="bg-background">
-              <TableRow>
-                <TableHead className="sticky top-0 z-20 bg-muted/50">ID</TableHead>
-                <TableHead className="sticky top-0 z-20 bg-muted/50">Company Name</TableHead>
-                <TableHead className="sticky top-0 z-20 bg-muted/50">Email</TableHead>
-                <TableHead className="sticky top-0 z-20 bg-muted/50">Status</TableHead>
-                <TableHead className="sticky top-0 z-20 bg-muted/50">Revenue</TableHead>
+            <TableHeader>
+              <TableRow className="sticky top-0 z-20 bg-muted">
+                <TableHead>ID</TableHead>
+                <TableHead>Company Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Revenue</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

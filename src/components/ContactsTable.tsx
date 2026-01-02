@@ -169,18 +169,18 @@ const ContactsTable = ({ columns, contacts, onEditContact, onDeleteContact }: Co
 
         <div className="overflow-auto max-h-[calc(100vh-280px)]">
           <Table>
-            <TableHeader className="sticky top-0 z-10 bg-background">
-              <TableRow className="bg-muted/50">
-                <TableHead className="sticky top-0 z-20 bg-muted/50 w-[50px]">
+            <TableHeader>
+              <TableRow className="sticky top-0 z-20 bg-muted">
+                <TableHead className="w-[50px]">
                   <Checkbox
                     checked={isAllSelected}
                     onCheckedChange={toggleSelectAll}
                   />
                 </TableHead>
                 {visibleColumns.map(column => (
-                  <TableHead key={column.key} className="sticky top-0 z-20 bg-muted/50">{column.label}</TableHead>
+                  <TableHead key={column.key}>{column.label}</TableHead>
                 ))}
-                <TableHead className="sticky top-0 z-20 bg-muted/50 text-right">Actions</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
